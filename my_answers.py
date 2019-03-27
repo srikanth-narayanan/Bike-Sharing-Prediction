@@ -17,7 +17,7 @@ class NeuralNetwork(object):
         self.lr = learning_rate
 
         #### Implemented sigmoid function ####
-        
+
         self.activation_function = lambda x : 1 / (1 + np.exp(-x))
 
     def train(self, features, targets):
@@ -58,7 +58,7 @@ class NeuralNetwork(object):
         hidden_outputs = self.activation_function(hidden_inputs) # signals from hidden layer
         # Output layer Sum(Weights_output_hidden * hidden outputs)
         final_inputs = np.dot(hidden_outputs, self.weights_hidden_to_output) # signals into final output layer
-        final_outputs = final_inputs # signals from final output layer # f(x) = x, 
+        final_outputs = final_inputs # signals from final output layer # f(x) = x,
 
         return final_outputs, hidden_outputs
 
@@ -78,7 +78,7 @@ class NeuralNetwork(object):
         # Output error, Output layer error is the difference between desired target and actual output.
         error = y - final_outputs
 
-        # hidden layer's contribution to the error 
+        # hidden layer's contribution to the error
         hidden_error = hidden_outputs * (1 - hidden_outputs)
 
         # Backpropagated error terms
@@ -90,7 +90,7 @@ class NeuralNetwork(object):
         delta_weights_i_h += np.dot(X[:,None], hidden_error_term[:,None].T)
         # Weight step (hidden to output)
         delta_weights_h_o += np.dot(hidden_outputs[:,None], output_error_term[:,None])
-        
+
         return delta_weights_i_h, delta_weights_h_o
 
     def update_weights(self, delta_weights_i_h, delta_weights_h_o, n_records):
@@ -128,7 +128,7 @@ class NeuralNetwork(object):
 #########################################################
 # Set your hyperparameters here
 ##########################################################
-iterations = 10000
-learning_rate = 0.01
+iterations = 25000
+learning_rate = 0.1
 hidden_nodes = 4
 output_nodes = 1
